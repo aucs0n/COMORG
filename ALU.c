@@ -21,49 +21,12 @@ unsigned char twosComp(unsigned data);
 unsigned char setFlags(unsigned int acc_value);
 void printBin(int data, unsigned char data_width);
 
-int main(void) {
-    /* These are for one custom user test in hex input (00 to FF). */
-    unsigned int op1_input = 0, op2_input = 0, cs_input = 0;
-
-    /* Required sample calls from the lab handout. */
-    ALU(0x03, 0x05, 0x02);
+void main(void) {
+    ALU(0x03, 0x05, 0x02); /* 00000011 - 00000101 (Subtract) */
     printf("\n");
-    ALU(0x88, 0x85, 0x01);
+    ALU(0x88, 0x85, 0x01); /* 10001000 + 10000101 (Add) */
     printf("\n");
-    ALU(0xC0, 0x02, 0x03);
-    printf("\n");
-
-    /* Additional tests so every control signal is exercised. */
-    ALU(0x0F, 0x0F, 0x04);
-    printf("\n");
-    ALU(0x0F, 0xF0, 0x05);
-    printf("\n");
-    ALU(0xAA, 0x00, 0x06);
-    printf("\n");
-    ALU(0xFF, 0x0F, 0x07);
-    printf("\n");
-    ALU(0x04, 0x01, 0x08);
-    printf("\n");
-    ALU(0x04, 0x01, 0x09);
-
-    printf("\nEnter custom ALU input in hex (e.g., OP1=03 OP2=05 CTRL=02).\n");
-    printf("OP1 (00-FF): ");
-    if (scanf("%x", &op1_input) != 1) {
-        return 0;
-    }
-    printf("OP2 (00-FF): ");
-    if (scanf("%x", &op2_input) != 1) {
-        return 0;
-    }
-    printf("CTRL (01-09): ");
-    if (scanf("%x", &cs_input) != 1) {
-        return 0;
-    }
-
-    printf("\n");
-    ALU((unsigned char)op1_input, (unsigned char)op2_input, (unsigned char)cs_input);
-
-    return 0;
+    ALU(0xC0, 0x02, 0x03); /* 11000000 * 00000010 (Multiply) */
 }
 
 int ALU(unsigned char operand1, unsigned char operand2, unsigned char control_signal) {
